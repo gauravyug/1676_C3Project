@@ -93,5 +93,33 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
 
+    @Test
+    public void get_overall_price_of_item_present_should_return_true() {
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+        restaurant.addToMenu("Sweet corn soup",120);
+        restaurant.addToMenu("Vegetable lasagne", 240);
+        Item item1 = new Item("Sweet corn soup",120);
+        Item item2 = new Item("Sweet corn soup",240);
+        List<Item> item =restaurant.getMenu();// new ArrayList<>();
+        int price = restaurant.getItemPrice(item);
+        assertEquals(price,360 );
+    }
+
+    @Test
+    public void get_overall_price_of_item_not_present_should_return_false() {
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+        restaurant.addToMenu("Sweet corn soup",120);
+        //restaurant.addToMenu("Vegetable lasagne", 240);
+        List<Item> item =   restaurant.getMenu();
+
+
+        int price = restaurant.getItemPrice(item);
+        assertTrue(price != 360);
+    }
+
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
