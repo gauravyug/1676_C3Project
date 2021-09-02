@@ -83,4 +83,22 @@ public class Restaurant {
         return name;
     }
 
+    public int getItemPrice(List<Item> item) {
+        int price = 0;
+        List<Item> menu = getMenu();
+        /*
+        This below code can be inproved for complexity
+        We can take map instead of List for Menu.
+        For time being I have used List
+        * */
+        for (Item item1: item) {
+            for(Item item2: menu) {
+                if(item1.getName().equals(item2.getName()))
+                    price += item2.getPrice();
+            }
+        }
+
+        return price;
+    }
+
 }
